@@ -1,0 +1,6 @@
+@media (max-width: 480px) {
+  .screen-header { align-items: flex-start; }
+  .screen-header .toolbar { flex-wrap: wrap; justify-content: flex-end; }
+  .set-row { padding: .5rem; }
+  .study-card { margin-top: 10vh; min-height: 12rem; }
+}

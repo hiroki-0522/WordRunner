@@ -1,0 +1,5 @@
+const CACHE_NAME = 'wordrunner-v1';
+const ASSETS = ['./', './index.html', './manifest.json', './css/style.css', './css/responsive.css', './js/app.js', './js/router.js', './js/database/db.js', './js/utils/parser.js', './js/utils/shuffle.js', './js/components/card.js', './js/components/template.js', './js/screens/home.js', './js/screens/settings.js', './js/screens/study.js', './js/screens/result.js'];
+self.addEventListener('install', event => event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
+self.addEventListener('activate', event => event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))));
+self.addEventListener('fetch', event => event.respondWith(caches.match(event.request).then(cached => cached || fetch(event.request).then(response => { const copy = response.clone(); caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy)); return response; }).catch(() => caches.match('./index.html')))));
